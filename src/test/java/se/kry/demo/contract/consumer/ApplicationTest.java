@@ -33,9 +33,9 @@ class ApplicationTest {
     var httpHeaders = new HttpHeaders();
     httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
 
-    var port = stubFinder.findAllRunningStubs().getPort("platform-hackdays-cloud-contract-producer");
+    var serviceUrl = stubFinder.findStubUrl("platform-hackdays-cloud-contract-producer");
     ResponseEntity<String> response = restTemplate.exchange(
-        "http://localhost:" + port + "/fraudcheck", HttpMethod.PUT,
+        serviceUrl + "/fraudcheck", HttpMethod.PUT,
         new HttpEntity<>(payload, httpHeaders), String.class);
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
