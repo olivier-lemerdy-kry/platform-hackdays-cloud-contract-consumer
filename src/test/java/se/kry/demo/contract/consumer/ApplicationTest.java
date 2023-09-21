@@ -12,10 +12,10 @@ import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRun
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import se.kry.demo.contract.consumer.service.FraudCheckRequest;
+import se.kry.demo.contract.consumer.domain.FraudCheckRequest;
 import se.kry.demo.contract.consumer.service.FraudCheckService;
 import se.kry.demo.contract.consumer.service.FraudCheckServiceURI;
-import se.kry.demo.contract.consumer.service.FraudCheckStatus;
+import se.kry.demo.contract.consumer.domain.FraudCheckStatus;
 
 @SpringBootTest
 @AutoConfigureStubRunner(

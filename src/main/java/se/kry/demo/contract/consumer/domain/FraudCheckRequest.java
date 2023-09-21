@@ -1,4 +1,4 @@
-package se.kry.demo.contract.consumer.service;
+package se.kry.demo.contract.consumer.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
