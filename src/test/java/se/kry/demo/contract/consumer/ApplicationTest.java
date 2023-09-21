@@ -19,7 +19,7 @@ import se.kry.demo.contract.consumer.domain.FraudCheckStatus;
 
 @SpringBootTest
 @AutoConfigureStubRunner(
-    ids = {"se.kry:platform-hackdays-cloud-contract-producer:+:stubs"},
+    ids = {StubsConstants.ID},
     stubsMode = StubRunnerProperties.StubsMode.LOCAL)
 class ApplicationTest {
 
@@ -39,7 +39,7 @@ class ApplicationTest {
     @Primary
     FraudCheckServiceURI testFraudCheckServiceURI(StubFinder stubFinder) throws URISyntaxException {
       return new FraudCheckServiceURI(
-          stubFinder.findStubUrl("platform-hackdays-cloud-contract-producer").toURI());
+          stubFinder.findStubUrl(StubsConstants.ARTIFACT_ID).toURI());
     }
 
   }
