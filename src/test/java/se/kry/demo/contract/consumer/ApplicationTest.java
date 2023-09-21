@@ -12,13 +12,10 @@ import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRun
 import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import se.kry.demo.contract.consumer.service.FraudCheckRequest;
+import se.kry.demo.contract.consumer.service.FraudCheckService;
 import se.kry.demo.contract.consumer.service.FraudCheckServiceURI;
+import se.kry.demo.contract.consumer.service.FraudCheckStatus;
 
 @SpringBootTest
 @AutoConfigureStubRunner(
@@ -27,23 +24,12 @@ import se.kry.demo.contract.consumer.service.FraudCheckServiceURI;
 class ApplicationTest {
 
   @Test
-  void contextLoads(@Autowired FraudCheckServiceURI fraudCheckServiceURI) {
-    var restTemplate = new RestTemplate();
-    var payload = """
-        {
-          "client.id": "1234567890",
-          loanAmount: 99999
-        }
-        """;
-    var httpHeaders = new HttpHeaders();
-    httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
+  void contextLoads(@Autowired FraudCheckService fraudCheckService) {
+    var request = new FraudCheckRequest("1234567890", 99999);
 
-    ResponseEntity<String> response = restTemplate.exchange(
-        fraudCheckServiceURI.apiURI(), HttpMethod.PUT,
-        new HttpEntity<>(payload, httpHeaders), String.class);
+    var response = fraudCheckService.fraudCheck(request);
 
-    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-    assertThat(response.getBody()).contains("FRAUD");
+    assertThat(response.fraudCheckStatus()).isEqualTo(FraudCheckStatus.FRAUD);
   }
 
   @TestConfiguration

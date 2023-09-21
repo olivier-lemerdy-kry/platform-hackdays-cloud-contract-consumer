@@ -2,10 +2,10 @@ package se.kry.demo.contract.consumer.service;
 
 import java.net.URI;
 
-public record FraudCheckServiceURI(URI baseUri) {
+public record FraudCheckServiceURI(URI baseURI) {
 
   public URI apiURI() {
-    return baseUri.resolve("/fraudcheck");
+    return baseURI.resolve("/fraudcheck");
   }
 
 }
